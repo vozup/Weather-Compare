@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 /*
 TODO Допилить клас Wind -> добавить направление
-
+TODO Outcome dont work
 
 
 
