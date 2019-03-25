@@ -11,8 +11,6 @@ import org.springframework.web.context.annotation.SessionScope;
 import javax.inject.Named;
 import java.io.IOException;
 
-@Named
-@SessionScope
 public class Test {
 
     public void runTest() throws IOException {
