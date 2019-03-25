@@ -8,7 +8,8 @@ public class WeatherInfo {
     private String temperatureFeeling;
     private Integer atmospherePressure;
     private Integer wet;
-    private Double wind;
+    private Wind wind;
+    //вероятность осадков
     private String probabilityPrecipitation;
     private String sunrise;
     private String sunset;
@@ -45,7 +46,7 @@ public class WeatherInfo {
             return this;
         }
 
-        public Builder setWind(Double wind) {
+        public Builder setWind(Wind wind) {
             WeatherInfo.this.wind = wind;
             return this;
         }
@@ -65,6 +66,15 @@ public class WeatherInfo {
             return this;
         }
 
+        public Builder setTime(String time) {
+            WeatherInfo.this.time = time;
+            return this;
+        }
+
+        public Builder setDate(String date) {
+            WeatherInfo.this.date = date;
+            return this;
+        }
 
         public WeatherInfo build(){
             return WeatherInfo.this;
@@ -87,7 +97,7 @@ public class WeatherInfo {
         return wet;
     }
 
-    public Double getWind() {
+    public Wind getWind() {
         return wind;
     }
 
@@ -102,4 +112,14 @@ public class WeatherInfo {
     public String getSunset() {
         return sunset;
     }
+
+    public String getTime() {
+        return time;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+
 }
