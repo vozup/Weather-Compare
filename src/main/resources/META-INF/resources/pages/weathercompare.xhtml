@@ -15,25 +15,25 @@
 
     <h:form>
         <p:panelGrid columns="2">
-            <h:outputText value="Time: "/>
+            <h:outputText value="#{WeatherInfoTitle.TIME}: "/>
             <h:outputText value="#{weather.currentWeather.time}"/>
 
-            <h:outputText value="Temperature: "/>
+            <h:outputText value="#{WeatherInfoTitle.TEMPERATURE}: "/>
             <h:outputText value="#{weather.currentWeather.temperature}"/>
 
-            <h:outputText value="Temperature Fealing: "/>
+            <h:outputText value="#{WeatherInfoTitle.TEMPERATURE_FEELING}: "/>
             <h:outputText value="#{weather.currentWeather.temperatureFeeling}"/>
 
-            <h:outputText value="Atmosphere Pressure: "/>
+            <h:outputText value="#{WeatherInfoTitle.ATMOSPHERE_PRESSUREA}: "/>
             <h:outputText value="#{weather.currentWeather.atmospherePressure}"/>
 
-            <h:outputText value="Probability Precipitation: "/>
+            <h:outputText value="#{WeatherInfoTitle.PROBABILITY_PRECIPITATION}: "/>
             <h:outputText value="#{weather.currentWeather.probabilityPrecipitation}"/>
 
-            <h:outputText value="Wet: "/>
+            <h:outputText value="#{WeatherInfoTitle.WET}: "/>
             <h:outputText value="#{weather.currentWeather.wet}"/>
 
-            <h:outputText value="Wind: "/>
+            <h:outputText value="#{WeatherInfoTitle.WIND}: "/>
             <h:outputText value="#{weather.currentWeather.wind.speed}"/>
 
         </p:panelGrid>

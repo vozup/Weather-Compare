@@ -5,8 +5,10 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.web.context.annotation.SessionScope;
+import vozup.weathercompare.com.consts.Sites;
 import vozup.weathercompare.com.consts.WeatherInfoTitle;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -16,6 +18,22 @@ import java.util.*;
 @SessionScope
 public class GetWeatherFromSinoptik {
     private String city;
+    private Integer countOfDays;
+    private String[] selectedSites;
+    private List<String> sites;
+
+    @PostConstruct
+    public void init(){
+        //Init sites URL
+        //TODO i3.properties
+        sites = new ArrayList<>();
+        for(Sites site : Sites.values()){
+            sites.add(site.getSite());
+        }
+        //Init column titles
+        //TODO i3.properties
+    }
+
     private WeatherInfo currentWeather;
     private List<WeatherInfo> weatherOnFewDays = new ArrayList<>();
 
@@ -55,6 +73,26 @@ public class GetWeatherFromSinoptik {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public Integer getCountOfDays() {
+        return countOfDays;
+    }
+
+    public void setCountOfDays(Integer countOfDays) {
+        this.countOfDays = countOfDays;
+    }
+
+    public String[] getSelectedSites() {
+        return selectedSites;
+    }
+
+    public void setSelectedSites(String[] selectedSites) {
+        this.selectedSites = selectedSites;
+    }
+
+    public List<String> getSites() {
+        return sites;
     }
 
     public void testing() throws IOException {

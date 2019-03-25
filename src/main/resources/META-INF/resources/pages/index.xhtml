@@ -11,13 +11,29 @@
     <h:outputStylesheet name="primefaces/components.css"/>
 </h:head>
 <h:body>
-
+    <p:importEnum type="vozup.weathercompare.com.consts.Sites" var="Sites" allSuffix="ALL_ENUM_VALUES"/>
     <h:form>
-        <h3>Select citys</h3>
-        <p:inputText value="#{weather.city}" required="true"/>
+        <p:panelGrid columns="2">
+            <p:outputLabel value="Місто: "/>
+            <p:inputText value="#{weather.city}" required="true"/>
 
-        <p:button outcome="goToWeatherCompare" value="Action"/>
+            <p:outputLabel value="Кількість днів: "/>
+            <p:selectOneButton value="#{weather.countOfDays}" required="true">
+                <f:selectItem itemLabel="1" itemValue="1" />
+                <f:selectItem itemLabel="3" itemValue="3" />
+                <f:selectItem itemLabel="5" itemValue="5" />
+                <f:selectItem itemLabel="7" itemValue="7" />
+            </p:selectOneButton>
+
+            <p:outputLabel value="З яких сайтів порівнювати: "/>
+            <p:selectCheckboxMenu id="multiple" value="#{weather.selectedSites}" label="Sites" multiple="true"
+                                  filter="true" filterMatchMode="startsWith" panelStyle="width:250px" required="true">
+                <f:selectItems value="#{weather.sites}" />
+            </p:selectCheckboxMenu>
+
+            <p:spacer/>
+            <p:commandButton action="#{weather.weatherNow}" value="Action"/>
+        </p:panelGrid>
     </h:form>
-
 </h:body>
 </html>
