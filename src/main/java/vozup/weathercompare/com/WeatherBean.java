@@ -4,13 +4,12 @@ import org.springframework.web.context.annotation.SessionScope;
 import vozup.weathercompare.com.consts.Sites;
 import vozup.weathercompare.com.sinoptik.WeatherFromSinoptik;
 import vozup.weathercompare.com.sinoptik.WeatherInfo;
+import vozup.weathercompare.com.sinoptik.Wind;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Named("weather")
@@ -20,18 +19,28 @@ public class WeatherBean {
     //Add valid 1,3,5,7
     private Integer countOfDays;
     private List<String> selectedSites;
-    private List<String> sites;
+    private List<String> allSitesUrl;
 
     private WeatherInfo currentWeather;
     private List<List<WeatherInfo>> weatherOnFewDays;
+    //
+    private List<Wind> randomTestList = new ArrayList<>();
+
 
     @PostConstruct
     public void init(){
-        //Init sites URL
+        randomTestList.add(new Wind(1.2, "sss"));
+        randomTestList.add(new Wind(1.2, "asas"));
+        randomTestList.add(new Wind(1.2, "ffff"));
+        randomTestList.add(new Wind(1.2, "ddd"));
+        randomTestList.add(new Wind(1.2, "zzz"));
+        randomTestList.add(new Wind(1.2, "xxxx"));
+
+        //Init allSitesUrl URL
         //TODO i3.properties
-        sites = new ArrayList<>();
+        allSitesUrl = new ArrayList<>();
         for(Sites site : Sites.values()){
-            sites.add(site.getSite());
+            allSitesUrl.add(site.getSite());
         }
         //Init column titles
         //TODO i3.properties
@@ -69,8 +78,8 @@ public class WeatherBean {
         this.selectedSites = selectedSites;
     }
 
-    public List<String> getSites() {
-        return sites;
+    public List<String> getAllSitesUrl() {
+        return allSitesUrl;
     }
 
     public WeatherInfo getCurrentWeather() {
@@ -79,5 +88,13 @@ public class WeatherBean {
 
     public List<List<WeatherInfo>> getWeatherOnFewDays() {
         return weatherOnFewDays;
+    }
+
+    public List<Wind> getRandomTestList() {
+        return randomTestList;
+    }
+
+    public void setRandomTestList(List<Wind> randomTestList) {
+        this.randomTestList = randomTestList;
     }
 }

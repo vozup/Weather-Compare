@@ -28,7 +28,7 @@
             <p:outputLabel value="З яких сайтів порівнювати: "/>
             <p:selectCheckboxMenu id="multiple" value="#{weather.selectedSites}" label="Sites" multiple="true"
                                   filter="true" filterMatchMode="startsWith" panelStyle="width:250px" required="true">
-                <f:selectItems value="#{weather.sites}" />
+                <f:selectItems value="#{weather.allSitesUrl}" />
             </p:selectCheckboxMenu>
 
             <p:spacer/>

@@ -18,5 +18,17 @@
         </navigation-case>
     </navigation-rule>
 
+    <application>
+        <locale-config>
+            <default-locale>ru</default-locale>
+            <supported-locale>ua</supported-locale>
+        </locale-config>
+
+        <resource-bundle>
+            <base-name>vozup.weathercompare.com.labels</base-name>
+            <var>labels</var>
+        </resource-bundle>
+    </application>
+
 
 </faces-config>

@@ -6,6 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 TODO Допилить клас Wind -> добавить направление
 TODO Outcome dont work
 TODO Добавить view погоды на несколько дней
+TODO внедрить файлы локализации
+TODO сделать табличку сравнения погоды
 
 
 

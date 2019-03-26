@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class Test {
 
-    public void runTest() throws IOException {
+    public void ge() throws IOException {
 
     }
 }

@@ -143,7 +143,7 @@ public class WeatherFromSinoptik {
         System.out.print("Time: ");
         System.out.print(time.text() + " ");
 
-        System.out.print("\nTemperature: ");
+        System.out.print("\nTemperatureш: ");
         System.out.print(temperature.text() + " ");
 
         System.out.print("\nTemperature Sensetive: ");
