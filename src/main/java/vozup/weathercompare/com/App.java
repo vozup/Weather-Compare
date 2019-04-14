@@ -1,17 +1,11 @@
 package vozup.weathercompare.com;
 
-/*
-TODO Допилить клас Wind -> добавить направление
-TODO Outcome dont work
-TODO Добавить view погоды на несколько дней
-TODO внедрить файлы локализации
-TODO сделать табличку сравнения погоды
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-
-
- */
+@SpringBootApplication
 public class App {
-    public static void main(String... args){
-
+    public static void main(String[] args) {
+        SpringApplication.run(App.class, args);
     }
 }
