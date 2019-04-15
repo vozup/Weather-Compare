@@ -10,12 +10,6 @@ import java.util.HashMap;
 
 @RestController
 public class Common {
-    @Autowired
-    private Cities cities;
 
-    @GetMapping("/sinoptik/cities")
-    public @ResponseBody HashMap<String, String> citiesAndUrls(){
-        return cities.getAllCities();
-    }
 
 }

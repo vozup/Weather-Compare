@@ -4,27 +4,48 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.context.annotation.ApplicationScope;
+import vozup.weathercompare.com.db.CitiesEntity;
+import vozup.weathercompare.com.db.CitiesRepository;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.*;
 
 /**
  * Класс для парсинга всех городов и url которые им соответствуют
  * с сайта sinoptik.ua
  */
+@Controller
 public class Cities {
+    private final CitiesRepository repository;
+
     private String slash = "/";
 
     private HashMap<String, String> hrefAndRegion;
     private HashMap<String, String> allCities;
 
-    public Cities(boolean isEmpty) throws IOException {
+    @Autowired
+    public Cities(CitiesRepository repository) throws IOException {
         hrefAndRegion = new HashMap<>();
         allCities = new HashMap<>();
-        if (!isEmpty){
-            initHrefAndRegion();
-            initAllCities();
+        this.repository = repository;
+
+        String propertyFileName = "app.properties";
+        Properties property = new Properties();
+
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(propertyFileName);
+        property.load(inputStream);
+
+        //FIXME FOR DEBUG
+        if (property.getProperty("app.isfirststart").equals("yes")){
+                initHrefAndRegion();
+                initAllCities();
         }
     }
 
@@ -49,6 +70,7 @@ public class Cities {
     /**
      *  Получить города и соответствующие url
      */
+    //FIXME Update regex
     private void initAllCities(){
         hrefAndRegion.forEach((region, url) -> {
             for (char ch = 'А'; ch < 'Я'; ch++){
@@ -58,10 +80,13 @@ public class Cities {
                     Elements col4Cities = doc.select(".col4");
 
                     for (Element el : col4Cities.select("li")){
-                        allCities.put(
-                                el.text().replaceAll("^[а-я]+\\s", "")
-                                        + " " + region,
-                                "https:" + el.select("a").attr("href"));
+                        CitiesEntity citiesEntity = new CitiesEntity();
+                        citiesEntity.setCity(el.text().replaceAll("^[а-я]+\\s", "")+ " " + region);
+                        citiesEntity.setUrl("https:" + el.select("a").attr("href"));
+                        repository.save(citiesEntity);
+//                      allCities.put(
+//                                el.text().replaceAll("^[а-я]+\\s", "") + " " + region,
+//                                "https:" + el.select("a").attr("href"));
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
