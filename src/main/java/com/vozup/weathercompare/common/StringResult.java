@@ -1,4 +1,7 @@
-package vozup.weathercompare.com.common;
+package com.vozup.weathercompare.common;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 import java.io.Serializable;
 

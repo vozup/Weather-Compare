@@ -1,27 +1,23 @@
-package vozup.weathercompare.com.sinoptik;
+package com.vozup.weathercompare.sites.sinoptik;
 
+import com.vozup.weathercompare.sites.WeatherFunctional;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import vozup.weathercompare.com.consts.WeatherInfoTitle;
+import com.vozup.weathercompare.consts.WeatherInfoTitle;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
 
-public class WeatherFromSinoptik {
+public class WeatherFromSinoptik implements WeatherFunctional {
     private String city;
 
     public WeatherFromSinoptik(String city) {
         this.city = city;
     }
 
-    /**
-     * Парсинг погоды на текущее время
-     * @return погодa на текущее время
-     * @throws IOException
-     */
     public WeatherInfo getCurrentWeather() throws IOException {
         WeatherInfo currentWeather;
 
@@ -33,12 +29,6 @@ public class WeatherFromSinoptik {
         return currentWeather;
     }
 
-    /**
-     * Парсинг погоды на несколько дней
-     * @param countOfDays количество дней, включительно с сегоднешним(1 - только сегодня)
-     * @return погода на несколько дней
-     * @throws IOException
-     */
     public List<List<WeatherInfo>> getWeatherOnFewDays(Integer countOfDays) throws IOException {
         List<List<WeatherInfo>> weatherOnFewDays = new ArrayList<>();
         if (countOfDays == 1){

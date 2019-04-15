@@ -1,4 +1,4 @@
-package vozup.weathercompare.com.consts;
+package com.vozup.weathercompare.consts;
 
 public enum WeatherInfoTitle {
     TEMPERATURE("Temperature"), TIME("Time"), DATE("Date"), TEMPERATURE_FEELING("TemperatureFeeling"),

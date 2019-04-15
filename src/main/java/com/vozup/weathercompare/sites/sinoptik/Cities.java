@@ -1,18 +1,14 @@
-package vozup.weathercompare.com.sinoptik;
+package com.vozup.weathercompare.sites.sinoptik;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.context.annotation.ApplicationScope;
-import vozup.weathercompare.com.db.CitiesEntity;
-import vozup.weathercompare.com.db.CitiesRepository;
+import com.vozup.weathercompare.db.CitiesEntity;
+import com.vozup.weathercompare.db.CitiesRepository;
 
-import javax.inject.Inject;
-import javax.inject.Named;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
