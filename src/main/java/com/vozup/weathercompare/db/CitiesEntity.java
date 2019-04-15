@@ -1,11 +1,7 @@
-package vozup.weathercompare.com.db;
-
-import org.springframework.cglib.core.GeneratorStrategy;
-import vozup.weathercompare.com.common.StringResult;
+package com.vozup.weathercompare.db;
 
 import javax.persistence.Id;
 
-import javax.annotation.Generated;
 import javax.persistence.*;
 
 @Entity

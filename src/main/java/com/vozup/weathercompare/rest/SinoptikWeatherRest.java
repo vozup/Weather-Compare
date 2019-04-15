@@ -1,13 +1,8 @@
-package vozup.weathercompare.com.rest;
+package com.vozup.weathercompare.rest;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.springframework.web.bind.annotation.*;
-import vozup.weathercompare.com.sinoptik.Cities;
-import vozup.weathercompare.com.sinoptik.WeatherFromSinoptik;
-import vozup.weathercompare.com.sinoptik.WeatherInfo;
+import com.vozup.weathercompare.sinoptik.WeatherFromSinoptik;
+import com.vozup.weathercompare.sinoptik.WeatherInfo;
 
 import java.io.IOException;
 import java.util.List;

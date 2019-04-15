@@ -1,4 +1,4 @@
-package vozup.weathercompare.com.sinoptik;
+package com.vozup.weathercompare.sinoptik;
 
 public class Wind {
     private Double speed;

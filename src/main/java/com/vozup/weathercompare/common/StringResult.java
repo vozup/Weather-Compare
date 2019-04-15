@@ -1,4 +1,4 @@
-package vozup.weathercompare.com.common;
+package com.vozup.weathercompare.common;
 
 import java.io.Serializable;
 

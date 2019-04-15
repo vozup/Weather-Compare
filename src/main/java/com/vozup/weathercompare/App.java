@@ -1,4 +1,4 @@
-package vozup.weathercompare.com;
+package com.vozup.weathercompare;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
