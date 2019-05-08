@@ -17,32 +17,18 @@ import java.util.*;
  * Класс для парсинга всех городов и url которые им соответствуют
  * с сайта sinoptik.ua
  */
-@Controller
 public class Cities {
-    private final CitiesRepository repository;
-
     private String slash = "/";
 
     private HashMap<String, String> hrefAndRegion;
     private HashMap<String, String> allCities;
 
-    @Autowired
     public Cities(CitiesRepository repository) throws IOException {
         hrefAndRegion = new HashMap<>();
         allCities = new HashMap<>();
-        this.repository = repository;
 
-        String propertyFileName = "app.properties";
-        Properties property = new Properties();
-
-        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(propertyFileName);
-        property.load(inputStream);
-
-        //FIXME FOR DEBUG
-        if (property.getProperty("app.isfirststart").equals("yes")){
-                initHrefAndRegion();
-                initAllCities();
-        }
+        initHrefAndRegion();
+        initAllCities(repository);
     }
 
     /**
@@ -67,7 +53,7 @@ public class Cities {
      *  Получить города и соответствующие url
      */
     //FIXME Update regex
-    private void initAllCities(){
+    private void initAllCities(CitiesRepository repository){
         hrefAndRegion.forEach((region, url) -> {
             for (char ch = 'А'; ch < 'Я'; ch++){
                 Document doc = null;
