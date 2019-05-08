@@ -1,4 +1,4 @@
-package com.vozup.weathercompare.sites.sinoptik;
+package com.vozup.weathercompare.sites;
 
 //FIXME Time, Date
 public class WeatherInfo {

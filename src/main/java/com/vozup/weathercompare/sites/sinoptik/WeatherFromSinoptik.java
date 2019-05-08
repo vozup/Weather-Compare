@@ -1,11 +1,13 @@
 package com.vozup.weathercompare.sites.sinoptik;
 
+import com.vozup.weathercompare.consts.WeatherInfoTitle;
 import com.vozup.weathercompare.sites.WeatherFunctional;
+import com.vozup.weathercompare.sites.WeatherInfo;
+import com.vozup.weathercompare.sites.Wind;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import com.vozup.weathercompare.consts.WeatherInfoTitle;
 
 import java.io.IOException;
 import java.time.LocalDate;

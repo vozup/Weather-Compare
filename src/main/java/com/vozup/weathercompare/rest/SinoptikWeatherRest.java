@@ -2,7 +2,7 @@ package com.vozup.weathercompare.rest;
 
 import org.springframework.web.bind.annotation.*;
 import com.vozup.weathercompare.sites.sinoptik.WeatherFromSinoptik;
-import com.vozup.weathercompare.sites.sinoptik.WeatherInfo;
+import com.vozup.weathercompare.sites.WeatherInfo;
 
 import java.io.IOException;
 import java.util.List;

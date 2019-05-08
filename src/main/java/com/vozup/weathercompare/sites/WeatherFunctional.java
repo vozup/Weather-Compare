@@ -1,7 +1,5 @@
 package com.vozup.weathercompare.sites;
 
-import com.vozup.weathercompare.sites.sinoptik.WeatherInfo;
-
 import java.io.IOException;
 import java.util.List;
 

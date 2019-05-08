@@ -1,10 +1,11 @@
 package com.vozup.weathercompare.common;
 
-import com.vozup.weathercompare.consts.Sites;
-import com.vozup.weathercompare.db.CitiesRepository;
+import com.vozup.weathercompare.db.GismeteoSitesRepository;
+import com.vozup.weathercompare.db.SinoptikCitiesRepository;
 import com.vozup.weathercompare.db.SitesRepository;
 import com.vozup.weathercompare.sites.InitSitesDb;
-import com.vozup.weathercompare.sites.sinoptik.Cities;
+import com.vozup.weathercompare.sites.gismeteo.GismeteoCities;
+import com.vozup.weathercompare.sites.sinoptik.SinoptikCities;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,9 +18,11 @@ import java.util.logging.Logger;
 @Configuration
 public class StartConfig {
     @Autowired
-    CitiesRepository repository;
+    SinoptikCitiesRepository repository;
     @Autowired
     SitesRepository sitesRepository;
+    @Autowired
+    GismeteoSitesRepository gismeteoCities;
     private Properties property;
 
     private static Logger log = Logger.getLogger(StartConfig.class.getName());
@@ -45,9 +48,24 @@ public class StartConfig {
      * @throws IOException
      */
     @Bean
-    public Cities parsingCitiesFromSinoptik() throws IOException {
+    public SinoptikCities parsingCitiesFromSinoptik() throws IOException {
         if (property.getProperty("app.isfirststart").equals("yes")){
-            return new Cities(repository);
+            log.info("Start init sinoptik DB");
+            return new SinoptikCities(repository);
+        }else return null;
+    }
+    /**
+     * Если параметр app.isfirststart = yes
+     * парсим все города и соответствующие ему URL'S
+     * и записываем в базу
+     * @return
+     * @throws IOException
+     */
+    @Bean
+    public GismeteoCities parsingCitiesFromGismeteo() throws IOException {
+        if (property.getProperty("app.isfirststart").equals("yes")){
+            log.info("Start init gismeteo DB");
+            return new GismeteoCities(gismeteoCities);
         }else return null;
     }
     /**
@@ -59,6 +77,7 @@ public class StartConfig {
     @Bean
     public InitSitesDb initSitesDb(){
         if (property.getProperty("app.isinitsitesdb").equals("yes")){
+            log.info("Start init sites DB");
             return new InitSitesDb(sitesRepository);
         }else return null;
     }

@@ -1,12 +1,10 @@
 package com.vozup.weathercompare.db;
 
-import javax.persistence.Id;
-
 import javax.persistence.*;
 
 @Entity
 @Table
-public class CitiesEntity {
+public class GismeteoCitiesEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

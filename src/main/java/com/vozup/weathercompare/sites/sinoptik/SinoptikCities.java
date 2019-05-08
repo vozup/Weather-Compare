@@ -1,29 +1,27 @@
 package com.vozup.weathercompare.sites.sinoptik;
 
+import com.vozup.weathercompare.sites.CommonSite;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import com.vozup.weathercompare.db.CitiesEntity;
-import com.vozup.weathercompare.db.CitiesRepository;
+import com.vozup.weathercompare.db.SinoptikCitiesEntity;
+import com.vozup.weathercompare.db.SinoptikCitiesRepository;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.*;
 
 /**
  * Класс для парсинга всех городов и url которые им соответствуют
  * с сайта sinoptik.ua
  */
-public class Cities {
+public class SinoptikCities extends CommonSite {
     private String slash = "/";
 
     private HashMap<String, String> hrefAndRegion;
     private HashMap<String, String> allCities;
 
-    public Cities(CitiesRepository repository) throws IOException {
+    public SinoptikCities(SinoptikCitiesRepository repository) throws IOException {
         hrefAndRegion = new HashMap<>();
         allCities = new HashMap<>();
 
@@ -53,7 +51,7 @@ public class Cities {
      *  Получить города и соответствующие url
      */
     //FIXME Update regex
-    private void initAllCities(CitiesRepository repository){
+    private void initAllCities(SinoptikCitiesRepository repository){
         hrefAndRegion.forEach((region, url) -> {
             for (char ch = 'А'; ch < 'Я'; ch++){
                 Document doc = null;
@@ -62,10 +60,10 @@ public class Cities {
                     Elements col4Cities = doc.select(".col4");
 
                     for (Element el : col4Cities.select("li")){
-                        CitiesEntity citiesEntity = new CitiesEntity();
-                        citiesEntity.setCity(el.text().replaceAll("^[а-я]+\\s", "")+ " " + region);
-                        citiesEntity.setUrl("https:" + el.select("a").attr("href"));
-                        repository.save(citiesEntity);
+                        SinoptikCitiesEntity sinoptikCitiesEntity = new SinoptikCitiesEntity();
+                        sinoptikCitiesEntity.setCity(el.text().replaceAll("^[а-я]+\\s", "")+ " " + region);
+                        sinoptikCitiesEntity.setUrl("https:" + el.select("a").attr("href"));
+                        repository.save(sinoptikCitiesEntity);
 //                      allCities.put(
 //                                el.text().replaceAll("^[а-я]+\\s", "") + " " + region,
 //                                "https:" + el.select("a").attr("href"));
