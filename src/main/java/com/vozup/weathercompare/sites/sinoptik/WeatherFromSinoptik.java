@@ -1,6 +1,8 @@
 package com.vozup.weathercompare.sites.sinoptik;
 
 import com.vozup.weathercompare.consts.WeatherInfoTitle;
+import com.vozup.weathercompare.db.SinoptikCitiesEntity;
+import com.vozup.weathercompare.db.SinoptikCitiesRepository;
 import com.vozup.weathercompare.sites.WeatherFunctional;
 import com.vozup.weathercompare.sites.WeatherInfo;
 import com.vozup.weathercompare.sites.Wind;
@@ -14,16 +16,20 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class WeatherFromSinoptik implements WeatherFunctional {
-    private String city;
+    private SinoptikCitiesRepository repository;
+    private Long id;
 
-    public WeatherFromSinoptik(String city) {
-        this.city = city;
+    public WeatherFromSinoptik(Long id, SinoptikCitiesRepository sinoptikCitiesRepository) {
+        this.id = id;
+        this.repository = sinoptikCitiesRepository;
     }
 
+    //FIXME
     public WeatherInfo getCurrentWeather() throws IOException {
-        WeatherInfo currentWeather;
+        SinoptikCitiesEntity citiesEntity = repository.findById(id).orElseThrow(RuntimeException::new);
+        WeatherInfo currentWeather = null;
 
-        Document doc = Jsoup.connect("https://sinoptik.ua/погода-" + city.toLowerCase()).get();
+        Document doc = Jsoup.connect(citiesEntity.getUrl()).get();
         Elements weatherDetails = doc.select(".rSide .weatherDetails");
         Elements current = weatherDetails.select(".cur");
 
@@ -31,6 +37,7 @@ public class WeatherFromSinoptik implements WeatherFunctional {
         return currentWeather;
     }
 
+    //FIXME
     public List<List<WeatherInfo>> getWeatherOnFewDays(Integer countOfDays) throws IOException {
         List<List<WeatherInfo>> weatherOnFewDays = new ArrayList<>();
         if (countOfDays == 1){
@@ -77,7 +84,9 @@ public class WeatherFromSinoptik implements WeatherFunctional {
      * @throws IOException
      */
     private  List<WeatherInfo> getWeatherOnDay(String date) throws IOException {
-        Document doc = Jsoup.connect("https://sinoptik.ua/погода-" + city.toLowerCase() + "/" + date).get();
+        //FIXME
+        SinoptikCitiesEntity citiesEntity = repository.findById(id).orElseThrow(RuntimeException::new);
+        Document doc = Jsoup.connect(citiesEntity.getUrl() + "/" + date).get();
         Map<WeatherInfoTitle, List<String>> weatherOnDay = new HashMap<>();
 
         Elements weatherDetails = doc.select(".rSide .weatherDetails");
@@ -118,47 +127,5 @@ public class WeatherFromSinoptik implements WeatherFunctional {
         }
 
         return weatherInfos;
-    }
-
-    public void testing(String date) throws IOException {
-        Document doc = Jsoup.connect("https://sinoptik.ua/погода-" + city.toLowerCase() + "/" + date).get();
-
-        Elements weatherDetails = doc.select(".rSide .weatherDetails");
-        Element temperature = weatherDetails.select(".temperature").get(0);
-        Element temperatureSens = weatherDetails.select(".temperatureSens").get(0);
-        Element gray = weatherDetails.select(".gray").not(".time").get(0);
-        Element wind = weatherDetails.select(".gray").not(".time").get(1);
-        Element time = weatherDetails.select(".gray").get(0);
-        Element wet = weatherDetails.select(".gray").not(".time").next("tr").get(0);
-        Element rain = weatherDetails.select(".gray").not(".time").next("tr").get(1);
-
-        System.out.print("Time: ");
-        System.out.print(time.text() + " ");
-
-        System.out.print("\nTemperatureш: ");
-        System.out.print(temperature.text() + " ");
-
-        System.out.print("\nTemperature Sensetive: ");
-        System.out.print(temperatureSens.text() + " ");
-
-        System.out.print("\nWind: ");
-        System.out.print(wind.text() + " ");
-
-        System.out.print("\nGray: ");
-        System.out.print(gray.text() + " ");
-
-        System.out.print("\nWet: ");
-        System.out.print(wet.text() + " ");
-
-        System.out.print("\nRain: ");
-        System.out.print(rain.text() + " ");
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
     }
 }
