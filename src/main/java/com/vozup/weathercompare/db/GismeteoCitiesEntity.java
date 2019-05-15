@@ -10,6 +10,8 @@ public class GismeteoCitiesEntity {
     private Long id;
     @Column(name = "CITY")
     private String city;
+    @Column(name = "REGION")
+    private String region;
     @Column(name = "URL")
     private String url;
 
@@ -35,5 +37,13 @@ public class GismeteoCitiesEntity {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
     }
 }

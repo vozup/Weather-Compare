@@ -1,10 +1,7 @@
 package com.vozup.weathercompare.sites.gismeteo;
 
-import com.vozup.weathercompare.common.StartConfig;
 import com.vozup.weathercompare.db.GismeteoCitiesEntity;
 import com.vozup.weathercompare.db.GismeteoSitesRepository;
-import com.vozup.weathercompare.db.SinoptikCitiesEntity;
-import com.vozup.weathercompare.db.SinoptikCitiesRepository;
 import com.vozup.weathercompare.sites.CommonSite;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -51,8 +48,9 @@ public class GismeteoCities extends CommonSite {
                     Elements citiesInRegion = docExt.getElementsByClass("districts subregions wrap")
                             .select(".group").select("ul li a");
                     for (Element el : citiesInRegion) {
+                        String district = el.text();
                         hrefAndRegionExt.put(
-                                region + " " + el.text(),
+                                district + " " + region,
                                 "https://www.gismeteo.ua" + el.attr("href"));
                     }
                 } catch (IOException e) {
@@ -75,7 +73,9 @@ public class GismeteoCities extends CommonSite {
 
                     for (Element el : citiesInRegion){
                         GismeteoCitiesEntity gismeteoCitiesEntity = new GismeteoCitiesEntity();
-                        gismeteoCitiesEntity.setCity(el.text() + " " + region);
+                        String city = el.text();
+                        gismeteoCitiesEntity.setCity(city);
+                        gismeteoCitiesEntity.setRegion(region);
                         gismeteoCitiesEntity.setUrl("https://www.gismeteo.ua" + el.attr("href"));
                         repository.save(gismeteoCitiesEntity);
                     }
