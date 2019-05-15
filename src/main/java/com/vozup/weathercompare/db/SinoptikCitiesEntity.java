@@ -12,6 +12,8 @@ public class SinoptikCitiesEntity {
     private String city;
     @Column(name = "REGION")
     private String region;
+    @Column(name = "FULL_LOCATION")
+    private String fullLocation;
     @Column(name = "URL")
     private String url;
 
@@ -45,5 +47,13 @@ public class SinoptikCitiesEntity {
 
     public void setRegion(String region) {
         this.region = region;
+    }
+
+    public String getFullLocation() {
+        return fullLocation;
+    }
+
+    public void setFullLocation(String fullLocation) {
+        this.fullLocation = fullLocation;
     }
 }

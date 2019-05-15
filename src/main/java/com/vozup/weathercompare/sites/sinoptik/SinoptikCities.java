@@ -62,9 +62,11 @@ public class SinoptikCities extends CommonSite {
                     for (Element el : col4Cities.select("li")){
                         SinoptikCitiesEntity sinoptikCitiesEntity = new SinoptikCitiesEntity();
                         String city = el.select("a").text();
-                        sinoptikCitiesEntity.setCity(city.replaceAll("^[а-я]+\\s", ""));
+                        city = city.replaceAll("^[а-я]+\\s", "");
+                        sinoptikCitiesEntity.setCity(city);
                         String fullRegion = el.select("span").text() + " " + region;
                         sinoptikCitiesEntity.setRegion(fullRegion);
+                        sinoptikCitiesEntity.setFullLocation(city + " " + fullRegion);
                         sinoptikCitiesEntity.setUrl("https:" + el.select("a").attr("href"));
                         repository.save(sinoptikCitiesEntity);
 //                      allCities.put(

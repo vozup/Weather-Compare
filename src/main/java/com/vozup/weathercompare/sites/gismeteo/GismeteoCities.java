@@ -76,6 +76,7 @@ public class GismeteoCities extends CommonSite {
                         String city = el.text();
                         gismeteoCitiesEntity.setCity(city);
                         gismeteoCitiesEntity.setRegion(region);
+                        gismeteoCitiesEntity.setFullLocation(city + " " + region);
                         gismeteoCitiesEntity.setUrl("https://www.gismeteo.ua" + el.attr("href"));
                         repository.save(gismeteoCitiesEntity);
                     }
