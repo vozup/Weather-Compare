@@ -1,15 +1,15 @@
 package com.vozup.weathercompare.sites.sinoptik;
 
+import com.vozup.weathercompare.db.SinoptikCitiesEntity;
+import com.vozup.weathercompare.db.SinoptikCitiesRepository;
 import com.vozup.weathercompare.sites.CommonSite;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import com.vozup.weathercompare.db.SinoptikCitiesEntity;
-import com.vozup.weathercompare.db.SinoptikCitiesRepository;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
 
 /**
  * Класс для парсинга всех городов и url которые им соответствуют
@@ -61,7 +61,10 @@ public class SinoptikCities extends CommonSite {
 
                     for (Element el : col4Cities.select("li")){
                         SinoptikCitiesEntity sinoptikCitiesEntity = new SinoptikCitiesEntity();
-                        sinoptikCitiesEntity.setCity(el.text().replaceAll("^[а-я]+\\s", "")+ " " + region);
+                        String city = el.select("a").text();
+                        sinoptikCitiesEntity.setCity(city.replaceAll("^[а-я]+\\s", ""));
+                        String fullRegion = el.select("span").text() + " " + region;
+                        sinoptikCitiesEntity.setRegion(fullRegion);
                         sinoptikCitiesEntity.setUrl("https:" + el.select("a").attr("href"));
                         repository.save(sinoptikCitiesEntity);
 //                      allCities.put(

@@ -49,7 +49,7 @@ public class StartConfig {
      */
     @Bean
     public SinoptikCities parsingCitiesFromSinoptik() throws IOException {
-        if (property.getProperty("app.isfirststart").equals("yes")){
+        if (property.getProperty("app.init.sinoptik.db").equals("yes")){
             log.info("Start init sinoptik DB");
             return new SinoptikCities(repository);
         }else return null;
@@ -63,7 +63,7 @@ public class StartConfig {
      */
     @Bean
     public GismeteoCities parsingCitiesFromGismeteo() throws IOException {
-        if (property.getProperty("app.isfirststart").equals("yes")){
+        if (property.getProperty("app.init.gismeteo.db").equals("yes")){
             log.info("Start init gismeteo DB");
             return new GismeteoCities(gismeteoCities);
         }else return null;
@@ -76,7 +76,7 @@ public class StartConfig {
      */
     @Bean
     public InitSitesDb initSitesDb(){
-        if (property.getProperty("app.isinitsitesdb").equals("yes")){
+        if (property.getProperty("app.isinit.sites.db").equals("yes")){
             log.info("Start init sites DB");
             return new InitSitesDb(sitesRepository);
         }else return null;

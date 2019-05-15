@@ -1,7 +1,5 @@
 package com.vozup.weathercompare.db;
 
-import javax.persistence.Id;
-
 import javax.persistence.*;
 
 @Entity
@@ -12,6 +10,8 @@ public class SinoptikCitiesEntity {
     private Long id;
     @Column(name = "CITY")
     private String city;
+    @Column(name = "REGION")
+    private String region;
     @Column(name = "URL")
     private String url;
 
@@ -37,5 +37,13 @@ public class SinoptikCitiesEntity {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
     }
 }
